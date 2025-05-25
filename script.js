@@ -8,15 +8,12 @@ let offset = 0;
 async function init() {
     await fetchPokemons();
     await fetchPokemonData();
-    console.log(pokemons);
-    console.log(pokemonData);
+    renderPokemons();
 }
 
-async function fetchPokemons(limit = 25, offset = 0) {
+async function fetchPokemons() {
     let response = await fetch(`${BASE_URL}limit=${limit}&offset=${offset}`);
     let responseToJson = await response.json();
-    
-    pokemons = []; // Array leeren
     
     for (let i = 0; i < responseToJson.results.length; i++) {
         pokemons.push({
@@ -24,6 +21,7 @@ async function fetchPokemons(limit = 25, offset = 0) {
             url: responseToJson.results[i].url
         });
     }
+    console.log(pokemons);
 }
 
 async function fetchPokemonData() {
@@ -32,5 +30,21 @@ async function fetchPokemonData() {
         let responseToJson = await response.json();
         pokemonData.push(responseToJson);
     }
+    console.log(pokemonData);
 }
 
+function renderPokemons(){
+    let pokeCardsContainer = document.getElementById("poke-cards-container");
+    pokeCardsContainer.innerHTML = '';
+    for (let i = 0; i < pokemons.length; i++){
+        pokeCardsContainer.innerHTML += pokeCardTemplate(pokemons[i], pokemonData[i], i);
+    }
+}
+
+ async function loadMorePokemons(){
+    limit += 25;
+    offset += 25;
+    await fetchPokemons();
+    await fetchPokemonData();
+    renderPokemons();
+}

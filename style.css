@@ -3,12 +3,15 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px 80px;
+    height: 60px;
+    background-color: #f0f0f0;
 }
 
 .header-left {
     display: flex;
     align-items: center;
-    gap: 10px;
+    font-size: 12px;
+    gap: 12px;
 }
 
 .pokeball-img {
@@ -22,6 +25,90 @@
     padding: 8px 12px;
     border-radius: 5px;
     border: 2px solid #a1a1a1;
-    width: 250px;
+    width: 280px;
 }
 
+.loading-spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px);
+    background-color: aquamarine;
+}
+
+.poke-cards-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.poke-card{
+    width: 280px;
+    height: 280px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    border: 2px solid #a1a1a1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url(./assets/img/pokeball2.png);
+    background-position: left;
+}
+
+.poke-card:hover{
+    box-shadow: 4px 4px 0 #a1a1a1;
+    transform: scale(1.04);
+    transition: transform 0.2s ease-in-out;
+}
+
+.poke-card h3 {
+    margin-top: 0px;
+    margin-bottom:10px;
+}
+
+.poke-card h4 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.poke-card img{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.poke-card span {
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 2px solid #000000;
+}
+
+.types{
+    display: flex;
+    gap: 10px;
+}
+
+.load-button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.load-button{
+    font-family: 'PressStart2P';
+    font-size: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 2px solid #a1a1a1;
+    cursor: pointer;
+}
+
+.load-button:hover{
+    box-shadow: 4px 4px 0 #a1a1a1;
+    transform: scale(1.04);
+    transition: transform 0.2s ease-in-out;
+}
