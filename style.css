@@ -1,114 +1,316 @@
+/* Header */
 .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 80px;
-    height: 60px;
-    background-color: #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 80px;
+  height: 60px;
+  background-color: #f0f0f0;
 }
 
 .header-left {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  gap: 12px;
 }
 
 .pokeball-img {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
 .search-input {
-    font-family: 'PressStart2P';
-    font-size: 10px;
-    padding: 8px 12px;
-    border-radius: 5px;
-    border: 2px solid #a1a1a1;
-    width: 280px;
+  font-family: "PressStart2P";
+  font-size: 10px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 2px solid #a1a1a1;
+  width: 280px;
 }
 
-.loading-spinner-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 100px);
-    background-color: aquamarine;
+/* Poke Cards */
+.poke-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  gap: 20px;
 }
 
-.poke-cards-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-    gap: 20px;
+.poke-card {
+  width: 280px;
+  height: 280px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  border: 2px solid #a1a1a1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url(./assets/img/pokeball2.png);
+  background-position: left;
 }
 
-.poke-card{
-    width: 280px;
-    height: 280px;
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    border: 2px solid #a1a1a1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-image: url(./assets/img/pokeball2.png);
-    background-position: left;
-}
-
-.poke-card:hover{
-    box-shadow: 4px 4px 0 #a1a1a1;
-    transform: scale(1.04);
-    transition: transform 0.2s ease-in-out;
+.poke-card:hover {
+  box-shadow: 4px 4px 0 #a1a1a1;
+  transform: scale(1.04);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .poke-card h3 {
-    margin-top: 0px;
-    margin-bottom:10px;
+  margin-top: 0px;
+  margin-bottom: 10px;
 }
 
 .poke-card h4 {
-    margin-top: 0px;
-    margin-bottom: 10px;
+  margin-top: 0px;
+  margin-bottom: 10px;
 }
 
-.poke-card img{
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
+.poke-card img {
+  width: 150px;
+  height: 150px;
+  object-fit: none;
 }
 
 .poke-card span {
-    padding: 5px 10px;
-    border-radius: 10px;
-    border: 2px solid #000000;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 2px solid #000000;
 }
 
-.types{
-    display: flex;
-    gap: 10px;
+.types {
+  display: flex;
+  gap: 10px;
+  padding-top: 5px;
 }
 
-.load-button-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
+/* Poke Details */
+.poke-details-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.3);
+  display: none;
 }
 
-.load-button{
-    font-family: 'PressStart2P';
-    font-size: 10px;
-    padding: 8px 12px;
-    border-radius: 5px;
-    border: 2px solid #a1a1a1;
-    cursor: pointer;
+.poke-details-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 475px;
+  height: 675px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  border: 2px solid #a1a1a1;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
-.load-button:hover{
-    box-shadow: 4px 4px 0 #a1a1a1;
-    transform: scale(1.04);
-    transition: transform 0.2s ease-in-out;
+.close-btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.close-btn {
+  background: #fff;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s;
+}
+
+.close-btn:hover {
+  background: #e8524f;
+}
+
+.poke-details-card h4 {
+  text-align: center;
+  margin: 0;
+}
+
+.poke-details-card h3 {
+  text-align: center;
+  margin: 5px 0;
+}
+
+.poke-details-card hr {
+  width: 100%;
+  border: 1px solid #a1a1a1;
+  margin: 15px 0;
+}
+
+.poke-details-img {
+  width: 120px;
+  height: 120px;
+  object-fit: scale-down;
+}
+
+.poke-details-card .types span {
+  padding: 3px 3px;
+  border-radius: 10px;
+  border: 2px solid #000000;
+}
+
+.evo-chain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+.evo-pokemon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.evo-pokemon img {
+  width: 80px;
+  height: 80px;
+  object-fit: scale-down;
+}
+
+.evo-pokemon span {
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+.evo-arrow {
+  font-size: 24px;
+  color: #666;
+  margin: 0 5px;
+}
+
+.stats-container {
+  width: 100%;
+}
+
+.stats-container h4 {
+  margin-bottom: 15px;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stat-label {
+  width: 80px;
+  text-transform: capitalize;
+  font-size: 14px;
+  padding-right: 35px;
+}
+.stat-bar-bg {
+  background: #e0e0e0;
+  border-radius: 8px;
+  width: 120px;
+  height: 14px;
+  overflow: hidden;
+  margin-right: 8px;
+}
+.stat-bar {
+  background: #4caf50;
+  height: 100%;
+  border-radius: 8px 0 0 8px;
+  transition: width 0.3s;
+}
+.stat-value {
+  min-width: 24px;
+  text-align: right;
+  font-size: 13px;
+}
+
+.toggle-btns {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+.toggle-btn {
+  font-family: "PressStart2P", Arial, sans-serif;
+  font-size: 11px;
+  padding: 6px 18px;
+  border-radius: 6px;
+  border: 2px solid #a1a1a1;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.toggle-btn.active,
+.toggle-btn:hover {
+  background: #e8524f;
+  color: #fff;
+}
+
+.moves-container {
+  width: 100%;
+  max-height: 220px;
+  overflow-y: auto;
+  background: #f8f8f8;
+  border-radius: 8px;
+  border: 1px solid #a1a1a1;
+  padding: 10px 0 10px 0;
+}
+.moves-list {
+  list-style: none;
+  padding: 0 20px;
+  margin: 0;
+  max-height: 155px;
+  overflow-y: auto;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.moves-list li {
+  padding: 4px 0;
+  border-bottom: 1px solid #e0e0e0;
+  text-transform: capitalize;
+}
+
+/* Load Button */
+.load-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.load-button {
+  font-family: "PressStart2P";
+  font-size: 10px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 2px solid #a1a1a1;
+  cursor: pointer;
+}
+
+.load-button:hover {
+  box-shadow: 4px 4px 0 #a1a1a1;
+  transform: scale(1.04);
+  transition: transform 0.2s ease-in-out;
 }

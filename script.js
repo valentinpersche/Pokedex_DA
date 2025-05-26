@@ -1,50 +1,131 @@
 let pokemons = [];
 let pokemonData = [];
-let BASE_URL = "https://pokeapi.co/api/v2/pokemon?"
+let pokemonEvoChain = [];
+let BASE_URL = "https://pokeapi.co/api/v2/pokemon?";
 let limit = 25;
 let offset = 0;
 
-
 async function init() {
-    await fetchPokemons();
-    await fetchPokemonData();
-    renderPokemons();
+  await fetchPokemons();
+  await fetchPokemonData();
+  await getPokemonEvoChain();
+  renderPokemons();
 }
 
 async function fetchPokemons() {
-    let response = await fetch(`${BASE_URL}limit=${limit}&offset=${offset}`);
-    let responseToJson = await response.json();
-    
-    for (let i = 0; i < responseToJson.results.length; i++) {
-        pokemons.push({
-            name: responseToJson.results[i].name,
-            url: responseToJson.results[i].url
-        });
-    }
-    console.log(pokemons);
+  let response = await fetch(`${BASE_URL}limit=${limit}&offset=${offset}`);
+  let responseToJson = await response.json();
+  pokemons = [];
+  for (let i = 0; i < responseToJson.results.length; i++) {
+    pokemons.push({
+      name: responseToJson.results[i].name,
+      url: responseToJson.results[i].url,
+    });
+  }
 }
 
 async function fetchPokemonData() {
-    for (const pokemon of pokemons){
-        let response = await fetch(pokemon.url);
-        let responseToJson = await response.json();
-        pokemonData.push(responseToJson);
-    }
-    console.log(pokemonData);
+  pokemonData = [];
+  for (const pokemon of pokemons) {
+    let response = await fetch(pokemon.url);
+    let responseToJson = await response.json();
+    pokemonData.push(responseToJson);
+  }
 }
 
-function renderPokemons(){
-    let pokeCardsContainer = document.getElementById("poke-cards-container");
-    pokeCardsContainer.innerHTML = '';
-    for (let i = 0; i < pokemons.length; i++){
-        pokeCardsContainer.innerHTML += pokeCardTemplate(pokemons[i], pokemonData[i], i);
-    }
+async function getPokemonEvoChain() {
+  pokemonEvoChain = [];
+  for (const pokemon of pokemonData) {
+    const evolutionData = await getEvolutionData(pokemon);
+    pokemonEvoChain.push({
+      name: pokemon.name,
+      evoChain: evolutionData,
+    });
+  }
 }
 
- async function loadMorePokemons(){
-    limit += 25;
-    offset += 25;
-    await fetchPokemons();
-    await fetchPokemonData();
-    renderPokemons();
+async function getShowdownImgUrlForPokemon(name) {
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+  const data = await response.json();
+  return data.sprites.other.showdown.front_default;
 }
+
+async function createEvolutionChainData(chain) {
+  const evolutionChain = [];
+  let current = chain;
+  while (current) {
+    const name = current.species.name;
+    const img = await getShowdownImgUrlForPokemon(name);
+    evolutionChain.push({ name, img });
+    current = current.evolves_to[0];
+  }
+  return evolutionChain;
+}
+
+async function getEvolutionData(pokemon) {
+  const speciesData = await fetchSpeciesData(pokemon.species.url);
+  const evolutionData = await fetchEvolutionChain(
+    speciesData.evolution_chain.url
+  );
+  return await createEvolutionChainData(evolutionData.chain);
+}
+
+async function fetchSpeciesData(url) {
+  const response = await fetch(url);
+  return await response.json();
+}
+
+async function fetchEvolutionChain(url) {
+  const response = await fetch(url);
+  return await response.json();
+}
+
+function renderPokemons() {
+  let pokeCardsContainer = document.getElementById("poke-cards-container");
+  pokeCardsContainer.innerHTML = "";
+  for (let i = 0; i < pokemons.length; i++) {
+    pokeCardsContainer.innerHTML += pokeCardTemplate(
+      pokemons[i],
+      pokemonData[i],
+      i
+    );
+  }
+}
+
+function showPokemonDetails(index) {
+  let pokeDetailsContainer = document.getElementById("poke-details-container");
+  pokeDetailsContainer.innerHTML = showPokemonDetailsTemplate(
+    pokemons[index],
+    pokemonData[index],
+    index,
+    pokemonData
+  );
+  pokeDetailsContainer.style.display = "flex";
+}
+
+function showStats() {
+  document.getElementById('stats-section').style.display = '';
+  document.getElementById('moves-section').style.display = 'none';
+  document.getElementById('stats-btn').classList.add('active');
+  document.getElementById('moves-btn').classList.remove('active');
+}
+function showMoves() {
+  document.getElementById('stats-section').style.display = 'none';
+  document.getElementById('moves-section').style.display = '';
+  document.getElementById('stats-btn').classList.remove('active');
+  document.getElementById('moves-btn').classList.add('active');
+}
+
+function closeDetailsCard() {
+  document.getElementById("poke-details-container").style.display = "none";
+}
+
+async function loadMorePokemons() {
+  limit += 25;
+  await fetchPokemons();
+  await fetchPokemonData();
+  await getPokemonEvoChain();
+  renderPokemons();
+}
+
+
