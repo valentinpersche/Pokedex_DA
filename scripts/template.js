@@ -19,7 +19,11 @@ function showPokemonDetailsTemplate(pokemon, pokemonData, index) {
       <hr>
       <h4>#${index+1}</h4>
       <h3>${pokemon.name.toUpperCase()}</h3>
-      <img class="poke-details-img" src="${pokemonData.sprites.other.showdown.front_default}" alt="${pokemon.name}">
+      <div class="pokemon-nav-container">
+        ${index > 0 ? `<button class="nav-btn prev-btn" onclick="showPokemonDetails(${index - 1})">←</button>` : '<div class="nav-btn-placeholder"></div>'}
+        <img class="poke-details-img" src="${pokemonData.sprites.other.showdown.front_default}" alt="${pokemon.name}">
+        ${index < pokemons.length - 1 ? `<button class="nav-btn next-btn" onclick="showPokemonDetails(${index + 1})">→</button>` : '<div class="nav-btn-placeholder"></div>'}
+      </div>
       <div class="types">
         ${pokemonData.types.map(type => `<span class="${type.type.name}-type-color">${type.type.name}</span>`).join('')}
       </div>

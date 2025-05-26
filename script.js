@@ -6,10 +6,12 @@ let limit = 25;
 let offset = 0;
 
 async function init() {
+  showSpinner();
   await fetchPokemons();
   await fetchPokemonData();
   await getPokemonEvoChain();
   renderPokemons();
+  hideSpinner();
 }
 
 async function fetchPokemons() {
@@ -80,15 +82,17 @@ async function fetchEvolutionChain(url) {
   return await response.json();
 }
 
-function renderPokemons() {
+function renderPokemons(filter = "") {
   let pokeCardsContainer = document.getElementById("poke-cards-container");
   pokeCardsContainer.innerHTML = "";
   for (let i = 0; i < pokemons.length; i++) {
-    pokeCardsContainer.innerHTML += pokeCardTemplate(
-      pokemons[i],
-      pokemonData[i],
-      i
-    );
+    if (pokemons[i].name.toLowerCase().includes(filter.toLowerCase())) {
+      pokeCardsContainer.innerHTML += pokeCardTemplate(
+        pokemons[i],
+        pokemonData[i],
+        i
+      );
+    }
   }
 }
 
@@ -120,12 +124,31 @@ function closeDetailsCard() {
   document.getElementById("poke-details-container").style.display = "none";
 }
 
+function showSpinner() {
+  document.getElementById('spinner-overlay').style.display = 'flex';
+}
+function hideSpinner() {
+  document.getElementById('spinner-overlay').style.display = 'none';
+}
+
 async function loadMorePokemons() {
+  showSpinner();
   limit += 25;
   await fetchPokemons();
   await fetchPokemonData();
   await getPokemonEvoChain();
   renderPokemons();
+  hideSpinner();
 }
+
+// Event Listener für die Suche
+window.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.querySelector('.search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      renderPokemons(e.target.value);
+    });
+  }
+});
 
 

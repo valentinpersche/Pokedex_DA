@@ -5,7 +5,7 @@
   align-items: center;
   padding: 20px 80px;
   height: 60px;
-  background-color: #f0f0f0;
+  background-color: #c6c6c6;
 }
 
 .header-left {
@@ -13,6 +13,7 @@
   align-items: center;
   font-size: 12px;
   gap: 12px;
+  padding-right: 20px;
 }
 
 .pokeball-img {
@@ -27,6 +28,11 @@
   border-radius: 5px;
   border: 2px solid #a1a1a1;
   width: 280px;
+}
+
+.search-input:focus {
+  outline: none;
+  border: 2px solid #e8524f;
 }
 
 /* Poke Cards */
@@ -292,6 +298,35 @@
   text-transform: capitalize;
 }
 
+.pokemon-nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  
+  .nav-btn {
+    font-family: "PressStart2P";
+    font-size: 20px;
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 10px;
+    transition: transform 0.2s, color 0.2s;
+  }
+  
+  .nav-btn:hover {
+    color: #e8524f;
+    transform: scale(1.2);
+  }
+  
+  .nav-btn-placeholder {
+    width: 44px;
+  }
+
 /* Load Button */
 .load-button-container {
   display: flex;
@@ -314,3 +349,26 @@
   transform: scale(1.04);
   transition: transform 0.2s ease-in-out;
 }
+
+#spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.spinner-pokeball {
+  width: 150px;
+  height: 150px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+
