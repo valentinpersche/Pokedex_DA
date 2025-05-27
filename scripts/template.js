@@ -62,5 +62,13 @@ function showPokemonDetailsTemplate(pokemon, pokemonData, index) {
   `;
 }
 
+function noResultsTemplate() {
+  return `
+      <div class="no-results-message">
+        The Pokemon you are looking for has not been loaded yet or does not exist. 
+        Please load more Pokemon or make sure the Pokemon exists.
+      </div>
+    `
+}
 
 

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./css/responsive.css">
     <link rel="stylesheet" href="./css/colors.css">
+    <link rel="shortcut icon" href="./assets/img/pokeball.png" type="image/x-icon">
     <script src="./scripts/template.js"></script>
     <script src="script.js"></script>
 </head>
@@ -23,16 +24,18 @@
         </div>
         <input type="search" placeholder="Search for a Pokémon..." class="search-input">
     </header>
-    <section class="content-container">
-        <div class="poke-cards-container" id="poke-cards-container">
-        </div>
-        <div class="poke-details-container" id="poke-details-container">
-            
-        </div>
-        <section class="load-button-container">
-            <button id="load-button" class="load-button" onclick="loadMorePokemons()">Load more...</button>
+    <div class="content-wrapper">
+        <section class="content-container">
+            <div class="poke-cards-container" id="poke-cards-container">
+            </div>
+            <div class="poke-details-container" id="poke-details-container">
+                
+            </div>
+            <section class="load-button-container">
+                <button id="load-button" class="load-button" onclick="loadMorePokemons()">Load more...</button>
+            </section>
         </section>
-    </section>
+    </div>
     <footer class="footer-container" id="footer-container">
         <p>Pokédex by <a href="https://github.com/valentinpersche/Pokedex_DA.git">Valentin Persche</a></p>
         <p>Data from <a href="https://pokeapi.co/">PokeAPI</a></p>

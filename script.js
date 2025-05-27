@@ -84,6 +84,8 @@ async function fetchEvolutionChain(url) {
 function renderPokemons(filter = "") {
   let pokeCardsContainer = document.getElementById("poke-cards-container");
   pokeCardsContainer.innerHTML = "";
+  let foundPokemon = false;
+  
   for (let i = 0; i < pokemons.length; i++) {
     if (pokemons[i].name.toLowerCase().includes(filter.toLowerCase())) {
       pokeCardsContainer.innerHTML += pokeCardTemplate(
@@ -91,7 +93,12 @@ function renderPokemons(filter = "") {
         pokemonData[i],
         i
       );
+      foundPokemon = true;
     }
+  }
+  
+  if (!foundPokemon && filter !== "") {
+    pokeCardsContainer.innerHTML = noResultsTemplate();
   }
 }
 

@@ -1,10 +1,13 @@
 @media (min-width: 1920px) {
-    body {
-        min-width: 1920px;
+    
+    .content-wrapper {
         max-width: 1920px;
-        margin: auto;
+        margin: 0 auto;
     }
 
+    .header-container {
+      justify-content: space-around;
+}
 }
 
 @media (max-width: 580px) {
