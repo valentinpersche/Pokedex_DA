@@ -381,14 +381,11 @@
   align-items: center;
   height: 100px;
   background-color: #c6c6c6;
-  position: relative;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   box-sizing: border-box;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  width: 100vw;
-
 }
 
 .footer-container a {
