@@ -10,7 +10,6 @@ function pokeCardTemplate(pokemon, pokemonData, index){
 }
 
 function showPokemonDetailsTemplate(pokemon, pokemonData, index) {
-  const evoChain = pokemonEvoChain[index].evoChain;
   return `
     <div class="poke-details-card">
       <div class="close-btn-container">
@@ -30,20 +29,12 @@ function showPokemonDetailsTemplate(pokemon, pokemonData, index) {
       <hr>
       <div class="evo-chain-container">
         <h4>Evolution-Chain</h4>
-        <div class="evo-chain">
-          ${evoChain.map((evo, i) => `
-            <div class="evo-pokemon">
-              <img src="${evo.img}" alt="${evo.name}">
-              <span>${evo.name}</span>
-            </div>
-            ${i < evoChain.length - 1 ? '<div class="evo-arrow">→</div>' : ''}
-          `).join('')}
-        </div>
+        <div class="evo-chain"></div>
       </div>
       <hr>
       <div class="toggle-btns">
-        <button class="toggle-btn active" id="stats-btn" onclick="showStats()">Stats</button>
-        <button class="toggle-btn" id="moves-btn" onclick="showMoves()">Moves</button>
+        <button class="toggle-btn active" id="stats-btn" onclick="toggleDetailsSection('stats')">Stats</button>
+        <button class="toggle-btn" id="moves-btn" onclick="toggleDetailsSection('moves')">Moves</button>
       </div>
       <div id="stats-section">
         <div class="stats-container">

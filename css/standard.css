@@ -3,4 +3,5 @@ body {
     box-sizing: border-box;
     font-family: 'PressStart2P';
     overflow-y: scroll;
+    overflow-x: hidden;
 }
